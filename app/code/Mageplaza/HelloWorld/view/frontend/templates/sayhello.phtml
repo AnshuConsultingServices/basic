@@ -1,7 +1,9 @@
-<form action="<?php echo $block->getFormAction() ?>" method="post">
-    <input name="firstname" type="text">
-    <input name="lastname" type="text">
-    <input name="phone" type="text">
-    <input name="bookingTime" type="date">
-    <input type="submit" value="Send booking informationsssss">
+<form method="POST" enctype="multipart/form-data" action="<?php echo $block->getFormAction() ?>">
+    Book name : <input name="bookname" type="text">
+    Author name : <input name="author" type="text">
+    Front cover : <input name="front-cover" type="file">
+    Back cover : <input name="back-cover" type="file"><br/>
+    Category : <input name="category" type="text"/>
+
+    <input type="submit" value="Submit Book">
 </form>
