@@ -22,6 +22,7 @@ class Display extends \Magento\Framework\App\Action\Action
                     $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // instance of object manager
 
                 $post = $this->getRequest()->getPost();
+                $myimage;
 
         if ($post) {
             // Retrieve your form data
@@ -39,11 +40,11 @@ if (isset($_FILES['front-cover'])) {
             $mediaDirectory = $objectManager->get('Magento\Framework\Filesystem')
                 ->getDirectoryWrite(DirectoryList::MEDIA);
 \Magento\Framework\App\ObjectManager::getInstance()->get('Psr\Log\LoggerInterface')->debug( '3');
-            $baseTmpMediaPath = $config->getBaseTmpMediaPath();
+            $baseMediaPath = $config->getBaseMediaPath();
             //$mediaDirectory->create($baseTmpMediaPath);
             //copy(__DIR__ . '/product_image.png', $mediaDirectory->getAbsolutePath($baseTmpMediaPath . '/product_image.png'));
 
-            \Magento\Framework\App\ObjectManager::getInstance()->get('Psr\Log\LoggerInterface')->debug( $baseTmpMediaPath);
+            \Magento\Framework\App\ObjectManager::getInstance()->get('Psr\Log\LoggerInterface')->debug( $baseMediaPath);
 //\Magento\Framework\App\ObjectManager::getInstance()->get('Psr\Log\LoggerInterface')->debug( $mediaDirectory);
         
  // init uploader model.
@@ -55,9 +56,9 @@ if (isset($_FILES['front-cover'])) {
                 $uploader->setAllowRenameFiles(true);
                 $uploader->setFilesDispersion(true);
 
-                $uploader->save($mediaDirectory->getAbsolutePath($baseTmpMediaPath . '/product_image.png'));
+                $myimage = $uploader->save($mediaDirectory->getAbsolutePath($baseMediaPath));
 
-}
+
             
 
 
@@ -86,10 +87,15 @@ if (isset($_FILES['front-cover'])) {
                                         'is_in_stock' => 1
                                     )
                                 );
+            $myfilepath = $myimage['file'];
+            \Magento\Framework\App\ObjectManager::getInstance()->get('Psr\Log\LoggerInterface')->debug($mediaDirectory->getAbsolutePath($baseMediaPath).$myfilepath ); 
+
+            $product->addImageToMediaGallery($mediaDirectory->getAbsolutePath($baseMediaPath).$myfilepath, array('image', 'small_image', 'thumbnail'), false, false); // Add Image 3
 //$this->_log("am here");
 
 //echo $product->getCustomAttributesCodes();
 $product->save();
+}
 }
         return $this->_pageFactory->create();
 return;
