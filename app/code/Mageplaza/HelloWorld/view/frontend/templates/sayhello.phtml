@@ -5,5 +5,30 @@
     Back cover : <input name="back-cover" type="file"><br/>
     Category : <input name="category" type="text"/>
 
+
+
+  <fieldset>
+  <legend>Choose your interests</legend>
+  <div>
+    <input type="checkbox" id="buy" name="Buy" value="buy" checked>
+    <label for="buy">Buy</label>
+  </div>
+  <div>
+    <input type="checkbox" id="swap" name="Swap" value="swap" checked>
+    <label for="swap">Swap</label>
+  </div>
+    <div>
+    <input type="checkbox" id="<?php echo $block->displayselect() ?>" name="Sell" checked>
+    <label for="sell">Sell</label>
+  </div>
+</fieldset>
+
+<select>
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select>
+
     <input type="submit" value="Submit Book">
 </form>

@@ -78,13 +78,15 @@ if (isset($_FILES['front-cover'])) {
 
             $product->setData('author_name',$author);
 
-
+$categories = array(8,2);
+$product->setCategoryIds($categories);
             //$product->getResource()->saveAttribute($product,'author_name');
             $product->setStockData(
                                     array(
                                         'use_config_manage_stock' => 0,
                                         'manage_stock' => 1,
-                                        'is_in_stock' => 1
+                                        'is_in_stock' => 1,
+                                        'qty' => 1
                                     )
                                 );
             $myfilepath = $myimage['file'];
