@@ -15,7 +15,7 @@ class Mmegamenu extends Abstractmenu
 		$menuCollection = $this->getModel('MGS\Mmegamenu\Model\Mmegamenu')
 			->getCollection()
 			->addStoreFilter($store)
-			->addFieldToFilter('parent_id', 1)
+			->addFieldToFilter('parent_id', 4)
 			->addFieldToFilter('status', 1)
 			->setOrder('position', 'ASC')
 		;
